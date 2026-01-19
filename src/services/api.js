@@ -4,6 +4,11 @@ const API_BASE_URL = import.meta.env.DEV
   ? '/api' 
   : (import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000');
 
+// URL base para el servicio de predicción (puerto 8082)
+const PREDICTION_API_URL = import.meta.env.DEV
+  ? '/prediction-api'
+  : (import.meta.env.VITE_PREDICTION_API_URL || 'http://localhost:8082');
+
 export const datasetsAPI = {
   // Get list of available datasets
   getDatasets: async () => {
@@ -116,6 +121,38 @@ export const generateAPI = {
     });
     if (!response.ok) {
       throw new Error('Failed to generate data');
+    }
+    return response.json();
+  },
+
+  // Generar datos sintéticos con anomalía
+  generateDataWithAnomaly: async (payload) => {
+    const response = await fetch(`${API_BASE_URL}/generate/anomaly`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload)
+    });
+    if (!response.ok) {
+      throw new Error('Failed to generate data with anomaly');
+    }
+    return response.json();
+  }
+};
+
+export const predictionAPI = {
+  // Predict patient health using Deep Learning or Random Forest model
+  predictPatient: async (patientData, modelType = 'dl') => {
+    const response = await fetch(`${PREDICTION_API_URL}/predict/patient/${modelType}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(patientData)
+    });
+    if (!response.ok) {
+      throw new Error('Failed to make prediction');
     }
     return response.json();
   }

@@ -3,6 +3,10 @@ import Sidebar from './components/Sidebar';
 import TrainingView from './components/TrainingView';
 import GenerateView from './components/GenerateView';
 import TasksHistoryView from './components/TasksHistoryView';
+import AnomalyInjectorView from './components/AnomalyInjectorView';
+import AuditLogsView from './components/AuditLogsView';
+import PredictionView from './components/PredictionView';
+import SettingsView from './components/SettingsView';
 
 function App() {
   const [activeView, setActiveView] = useState('training');
@@ -15,6 +19,14 @@ function App() {
         return <GenerateView />;
       case 'tasks':
         return <TasksHistoryView />;
+      case 'anomaly':
+        return <AnomalyInjectorView />;
+      case 'audit':
+        return <AuditLogsView />;
+      case 'prediction':
+        return <PredictionView />;
+      case 'settings':
+        return <SettingsView />;
       default:
         return <TrainingView />;
     }

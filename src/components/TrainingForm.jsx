@@ -162,15 +162,15 @@ function TrainingForm({ selectedDataset, onTriggerRefresh, hasRunningTasks, onNa
               value={batchSize}
               onChange={(e) => setBatchSize(e.target.value)}
               min="100"
-              max="5000"
+              max="2000"
               step="100"
               disabled={hasRunningTasks}
               className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-indigo-600 disabled:cursor-not-allowed disabled:opacity-60"
             />
             <div className="flex justify-between text-xs text-gray-500 mt-1">
               <span>100</span>
-              <span>2500</span>
-              <span>5000</span>
+              <span>1050</span>
+              <span>2000</span>
             </div>
             <p className="text-xs text-gray-500 mt-1 italic">
               Number of samples processed in each training batch

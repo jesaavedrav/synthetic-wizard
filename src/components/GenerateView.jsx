@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { generateAPI, modelsAPI } from '../services/api';
+import ExpandableJsonCell from './ExpandableJsonCell';
 
 const GenerateView = () => {
   const [numSamples, setNumSamples] = useState(100);
@@ -422,7 +423,11 @@ const GenerateView = () => {
                             </td>
                             {Object.values(row).map((value, i) => (
                               <td key={i} className="px-4 py-3 whitespace-nowrap text-sm text-gray-700">
-                                {typeof value === 'number' ? value.toFixed(2) : value}
+                                {typeof value === 'object' && value !== null ? (
+                                  <ExpandableJsonCell value={value} />
+                                ) : (
+                                  typeof value === 'number' ? value.toFixed(2) : value
+                                )}
                               </td>
                             ))}
                           </tr>
